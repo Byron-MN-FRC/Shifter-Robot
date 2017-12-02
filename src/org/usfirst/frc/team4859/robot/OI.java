@@ -1,14 +1,21 @@
 package org.usfirst.frc.team4859.robot;
 
-import edu.wpi.first.wpilibj.buttons.Button;
+import org.usfirst.frc.team4859.robot.commands.ShiftDown;
+import org.usfirst.frc.team4859.robot.commands.ShiftUp;
 
-import org.usfirst.frc.team4859.robot.commands.ExampleCommand;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	private final Joystick joystick = new Joystick(0);
+	
+	Button shiftUp = new JoystickButton(joystick, 5);
+	Button shiftDown = new JoystickButton(joystick, 3);
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.
@@ -36,4 +43,12 @@ public class OI {
 	// Start the command when the button is released and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
+	public OI( ) {
+		shiftUp.whenPressed(new ShiftUp());
+		shiftDown.whenPressed(new ShiftDown());
+	}
+	
+	public Joystick getJoystick() {
+		return joystick;
+	}
 }
